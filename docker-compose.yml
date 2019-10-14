@@ -1,0 +1,31 @@
+version: '3.7'
+
+volumes:
+  hana-data:
+
+services:
+
+  hanadb:
+    image: 
+      store/saplabs/hanaexpress:2.00.040.00.20190729.1 
+    container_name: 
+      "hanadb"
+    ports:
+      - '39013:39013' 
+      - '39017:39017' 
+      - '39041-39045:39041-39045' 
+      - '1128-1129:1128-1129' 
+      - '59013-59014:59013-59014'
+    sysctls:
+      - kernel.shmmax=1073741824
+      - net.ipv4.ip_local_port_range=40000 60999
+      - kernel.shmmni=524288
+      - kernel.shmall=8388608
+    entrypoint:
+      - /bin/sh
+      - ./database/db-entrypoint.sh
+    volumes:
+      - ./database:/database
+      - hana-data:/hana/mounts
+    restart:
+      always

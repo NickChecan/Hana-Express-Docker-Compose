@@ -1,0 +1,18 @@
+Start containers:
+$ sudo docker-compose up
+
+Delete containers and remove volumes:
+$ sudo docker-compose down -v
+
+Get IP Address and other information from the container:
+$ docker inspect <container_name>
+
+Access the container instance:
+$ sudo docker exec -it <container_name> bash
+
+Connect into the system database (Default SYSTEMDB):
+$ hdbsql -i 90 -d <system_database> -u SYSTEM -p <password>
+
+References:
+https://developers.sap.com/tutorials/hxe-ua-install-using-docker.html
+https://blogs.sap.com/2018/03/07/connecting-docker-hxe-and-sqlpad/
